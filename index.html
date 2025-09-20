@@ -1,23 +1,209 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="utf+7" />
+        <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
+        <meta name="description" content="Portfolio of Ingnop Khunra, an aspiring data scientist specializing in Python, machine learning, and data analysis." />
+        <meta name="author" content="Ingnop Khunra" />
         <title>Ingnop Khunra's Portfolio</title>
-        <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-        <!-- Font Awesome icons (free version)-->
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-        <!-- Google fonts-->
         <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
         <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
-        <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
+ 
+        <style>
+            /* Navigation Bar Hover Effect */
+            #mainNav .navbar-nav .nav-item .nav-link {
+                transition: all 0.3s ease-in-out;
+            }
+            #mainNav .navbar-nav .nav-item .nav-link:hover {
+                transform: translateY(-3px);
+                color: #ffc800 !important;
+            }
+
+            /* Certificate Card Hover Effect */
+            .certificate-card {
+                transition: transform 0.2s, box-shadow 0.2s;
+                background: linear-gradient(135deg, #f8fafc 60%, #e3e6f3 100%);
+                height: 100%;
+                display: flex;
+                align-items: stretch;
+            }
+            .certificate-card:hover {
+                transform: scale(1.05) rotate(-2deg);
+                box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+                z-index: 10;
+            }
+            .certificate-card img {
+                object-fit: cover;
+                height: 100%;
+                width: 100%;
+                border-radius: 1rem;
+                box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+                display: block;
+            }
+            @media (max-width: 768px) {
+                .certificate-card img {
+                height: 200px;
+                }
+            }
+
+            /* --- NEW EXPERIENCE SECTION STYLES --- */
+
+            /* Filter Buttons */
+            #experience-filters {
+                list-style: none;
+                padding: 0;
+                margin-bottom: 2rem;
+            }
+            #experience-filters li {
+                cursor: pointer;
+                display: inline-block;
+                padding: 0.5rem 1.25rem;
+                margin: 0.25rem;
+                border-radius: 50rem;
+                background-color: #e9ecef;
+                color: #212529;
+                transition: all 0.3s;
+                font-weight: 500;
+            }
+            #experience-filters li:hover, #experience-filters li.active {
+                background-color: #ffc800;
+                color: #fff;
+            }
+
+            /* Experience Item Card Design */
+            .experience-item {
+                position: relative;
+                display: block;
+                border-radius: 0.5rem;
+                overflow: hidden;
+                box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+                transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+            }
+            .experience-item .experience-link {
+                position: relative;
+                display: block;
+            }
+            .experience-item .experience-link .experience-hover {
+                display: flex;
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                background: rgba(255, 200, 0, 0.85);
+                align-items: center;
+                justify-content: center;
+                opacity: 0;
+                transition: opacity 0.3s ease;
+            }
+            .experience-item .experience-link .experience-hover .experience-hover-content {
+                font-size: 1.25rem;
+                color: white;
+            }
+            .experience-item:hover .experience-link .experience-hover {
+                opacity: 1;
+            }
+            .experience-item .experience-image img {
+                width: 100%;
+                height: 250px;
+                object-fit: cover;
+                transition: transform 0.3s ease;
+            }
+            .experience-item:hover .experience-image img {
+                transform: scale(1.05);
+            }
+            .experience-item .experience-caption {
+                padding: 1.5rem;
+                text-align: center;
+                background-color: #fff;
+            }
+            .experience-item .experience-caption .experience-caption-heading {
+                font-size: 1.25rem;
+                font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+                font-weight: 700;
+                margin-bottom: 0.25rem;
+            }
+            .experience-item .experience-caption .experience-caption-subheading {
+                font-style: italic;
+                font-family: "Roboto Slab", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            }
+            
+            /* Hide/Show animation for filter */
+            .experience-item.hide {
+                transform: scale(0.8);
+                opacity: 0;
+                width: 0;
+                padding: 0;
+                margin: 0;
+                pointer-events: none;
+            }
+            
+            /* On-Scroll Fade-in Animation */
+            .fade-in-element {
+                opacity: 0;
+                transform: translateY(20px);
+                transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            }
+            .fade-in-element.is-visible {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            /* Project Flip Card Animation */
+            .project-card-flip-container {
+                background-color: transparent;
+                width: 100%;
+                height: 280px; /* Adjust height as needed */
+                perspective: 1000px;
+            }
+            .project-card-flipper {
+                position: relative;
+                width: 100%;
+                height: 100%;
+                text-align: center;
+                transition: transform 0.6s;
+                transform-style: preserve-3d;
+            }
+            .project-card-flip-container:hover .project-card-flipper {
+                transform: rotateY(180deg);
+            }
+            .project-card-front, .project-card-back {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                -webkit-backface-visibility: hidden;
+                backface-visibility: hidden;
+                border-radius: 0.5rem;
+                overflow: hidden;
+                box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            }
+            .project-card-front {
+                background-color: #bbb;
+                color: black;
+            }
+            .project-card-front img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+            .project-card-back {
+                background-color: #212529;
+                color: white;
+                transform: rotateY(180deg);
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                padding: 1.5rem;
+            }
+            .project-tech-icons i {
+                font-size: 1.5rem;
+                margin: 0 0.5rem;
+            }
+        </style>
     </head>
     <body id="page-top">
-        <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
             <div class="container">
                 <a class="navbar-brand" href="#page-top"><img src="assets/img/navbar-logo.svg" alt="..." /></a>
@@ -30,13 +216,14 @@
                         <li class="nav-item"><a class="nav-link" href="#about">About me</a></li>                        
                         <li class="nav-item"><a class="nav-link" href="#education">Education</a></li>
                         <li class="nav-item"><a class="nav-link" href="#skill">Skills</a></li>    
-                        <li class="nav-item"><a class="nav-link" href="#portfolio">Portfolio</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#certificate">Certificates</a></li>    
+                        <li class="nav-item"><a class="nav-link" href="#portfolio">Experience</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#project">Projects</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#certificate">Certificates</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>   
                     </ul>
                 </div>
             </div>
         </nav>
-        <!-- Masthead-->
         <header class="masthead">
             <div class="container">
                 <div class="masthead-subheading">Welcome To My Portfolio!</div>
@@ -45,7 +232,6 @@
             </div>
         </header>
 
-        <!-- About Me-->
         <section class="page-section" id="about">
             <div class="container">
             <div class="text-center">
@@ -53,11 +239,8 @@
             </div>
             <div class="row justify-content-center">
                 <div class="col-md-8 text-center">
-                <span class="fa-stack fa-4x mb-4">
-                    <i class="fas fa-circle fa-stack-2x text-primary"></i>
-                    <i class="fas fa-user fa-stack-1x fa-inverse"></i>
-                </span>
-                <h4 class="my-3"></h4>
+                <img src="assets/img/my-profile-photo.jpg" class="img-fluid rounded-circle mb-4" alt="Ingnop Khunra" style="width: 200px; height: 200px; object-fit: cover; border: 7px solid #ffc800;">
+                <h4 class="my-3">Ingnop Khunra (Ing)</h4>
                 <p class="text-muted">"Hello! My name is Ingnop Khunra, but you can call me Ing. I’m 21 years old and was born on October 4, 2003.</p>
                 <p class="text-muted">I'm an aspiring data scientist with a passion for turning complex data into clear, actionable insights. With a strong interest in statistics, machine learning, and real world problem solving, I'm eager to explore how data can be used to drive smarter decisions and meaningful change.</p>
                 <p class="text-muted">I would describe myself as analytical, curious, detail-oriented, and always eager to learn something new especially when it involves data."</p>
@@ -66,7 +249,6 @@
             </div>
         </section>
 
-        <!-- Education-->
         <section class="page-section" id="education">
             <div class="container">
                 <div class="text-center">
@@ -94,67 +276,56 @@
                             <div class="timeline-body"><p class="text-muted">Plan Art - Math</p></div>
                         </div>
                     </li>
-                 
                 </ul>
             </div>
         </section>
 
-        <!-- Skills-->
         <section class="page-section" id="skill">
             <div class="container">
-            <div class="text-center">
-                <h3 class="section-heading text-uppercase">Skills</h3>
-                <h3 class="section-subheading text-muted"></h3>
-            </div>
-            <div class="row justify-content-center">
-                <!-- Hard Skills -->
-                <div class="col-md-5 text-end mb-4 mb-md-0">
-                    <h4 class="text-uppercase mb-3">Hard Skills</h4>
-                    <ul class="list-unstyled d-inline-block text-start">
-                        <li><i class="fas fa-check text-primary me-2"></i>Python</li>
-                        <li><i class="fas fa-check text-primary me-2"></i>C#</li>
-                        <li><i class="fas fa-check text-primary me-2"></i>C++</li>
-                        <li><i class="fas fa-check text-primary me-2"></i>Data Analysis</li>
-                        <li><i class="fas fa-check text-primary me-2"></i>Machine Learning</li>
-                        <li><i class="fas fa-check text-primary me-2"></i>SQL</li>
-                        <li><i class="fas fa-check text-primary me-2"></i>Statistics</li>
-                        <li><i class="fas fa-check text-primary me-2"></i>Excel</li>
-                        <li><i class="fas fa-check text-primary me-2"></i>Data Visualization</li>
-                        
-                    </ul>
+                <div class="text-center">
+                    <h3 class="section-heading text-uppercase">Skills</h3>
+                    <h3 class="section-subheading text-muted"></h3>
                 </div>
-                <!-- Soft Skills -->
-                <div class="col-md-5 text-start ms-md-5">
-                    <h4 class="text-uppercase mb-3">Soft Skills</h4>
-                    <ul class="list-unstyled d-inline-block text-start">
-                        <li><i class="fas fa-check text-primary me-2"></i>Collaboration</li>
-                        <li><i class="fas fa-check text-primary me-2"></i>Communication (Thai & English, formal and casual)</li>
-                        <li><i class="fas fa-check text-primary me-2"></i>Problem-solving</li>
-                        <li><i class="fas fa-check text-primary me-2"></i>Creativity</li>
-                        <li><i class="fas fa-check text-primary me-2"></i>Adaptability</li>
-                        <li><i class="fas fa-check text-primary me-2"></i>Critical thinking</li>
-                        <li><i class="fas fa-check text-primary me-2"></i>Empathy & Social awareness</li>
-                        <li><i class="fas fa-check text-primary me-2"></i>Initiative and self-learning</li>
-                        <li><i class="fas fa-check text-primary me-2"></i>Organization & Time management</li>
-                        <li><i class="fas fa-check text-primary me-2"></i>Public awareness / Community engagement</li>
-                        <li><i class="fas fa-check text-primary me-2"></i>Attention to detail</li>
-                    </ul>
+                <div class="row justify-content-center">
+                    <div class="col-lg-5 text-center mb-5 mb-lg-0">
+                        <h4 class="text-uppercase mb-4">Hard Skills</h4>
+                        <div class="px-lg-4">
+                            <span class="badge bg-primary fs-6 m-1 p-2">Python</span>
+                            <span class="badge bg-primary fs-6 m-1 p-2">C#</span>
+                            <span class="badge bg-primary fs-6 m-1 p-2">C++</span>
+                            <span class="badge bg-secondary fs-6 m-1 p-2">Data Analysis</span>
+                            <span class="badge bg-secondary fs-6 m-1 p-2">Machine Learning</span>
+                            <span class="badge bg-secondary fs-6 m-1 p-2">SQL</span>
+                            <span class="badge bg-success fs-6 m-1 p-2">Statistics</span>
+                            <span class="badge bg-success fs-6 m-1 p-2">Excel</span>
+                            <span class="badge bg-success fs-6 m-1 p-2">Data Visualization</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-5 text-center">
+                        <h4 class="text-uppercase mb-4">Soft Skills</h4>
+                        <div class="px-lg-4">
+                            <span class="badge bg-dark fs-6 m-1 p-2">Collaboration</span>
+                            <span class="badge bg-dark fs-6 m-1 p-2">Communication</span>
+                            <span class="badge bg-dark fs-6 m-1 p-2">Problem-solving</span>
+                            <span class="badge bg-dark fs-6 m-1 p-2">Creativity</span>
+                            <span class="badge bg-dark fs-6 m-1 p-2">Adaptability</span>
+                            <span class="badge bg-dark fs-6 m-1 p-2">Critical thinking</span>
+                            <span class="badge bg-dark fs-6 m-1 p-2">Time management</span>
+                            <span class="badge bg-dark fs-6 m-1 p-2">Attention to detail</span>
+                        </div>
+                    </div>
                 </div>
-            </div>
             </div>
         </section>
 
-        <!-- Portfolio Grid-->
+
         <section class="page-section bg-light" id="portfolio">
             <div class="container">
             <div class="text-center">
-                    <h2 class="section-heading text-uppercase">Portfolio</h2>
-                    <h3 class="section-subheading text-muted">My experience and project</h3>
+                    <h2 class="section-heading text-uppercase">Experience</h2>
                 </div>
                 <div class="row">
                     <div class="col-lg-4 col-sm-6 mb-4">
-                        
-                        <!-- Portfolio item 1-->
                         <div class="portfolio-item">
                             <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal1">
                                 <div class="portfolio-hover">
@@ -164,13 +335,11 @@
                             </a>
                             <div class="portfolio-caption">
                                 <div class="portfolio-caption-heading">Sawat D Craft</div>
-                                <div class="portfolio-caption-subheading text-muted">1- 4 July 2025</div>
+                                <div class="portfolio-caption-subheading text-muted">July 2024</div>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6 mb-4">
-
-                        <!-- Portfolio item 2-->
                         <div class="portfolio-item">
                             <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal2">
                                 <div class="portfolio-hover">
@@ -180,13 +349,11 @@
                             </a>
                             <div class="portfolio-caption">
                                 <div class="portfolio-caption-heading">Abilify : Au & All</div>
-                                <div class="portfolio-caption-subheading text-muted">20 May - 20 June 2025</div>
+                                <div class="portfolio-caption-subheading text-muted">May - June 2024</div>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6 mb-4">
-
-                        <!-- Portfolio item 3-->
                         <div class="portfolio-item">
                             <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal3">
                                 <div class="portfolio-hover">
@@ -196,13 +363,11 @@
                             </a>
                             <div class="portfolio-caption">
                                 <div class="portfolio-caption-heading">Abilify : BU x Abilify Trainee</div>
-                                <div class="portfolio-caption-subheading text-muted">14 March - 4 April 2025</div>
+                                <div class="portfolio-caption-subheading text-muted">March - April 2024</div>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6 mb-4 mb-lg-0">
-
-                        <!-- Portfolio item 4-->
                         <div class="portfolio-item">
                             <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal4">
                                 <div class="portfolio-hover">
@@ -217,8 +382,6 @@
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6 mb-4 mb-sm-0">
-
-                        <!-- Portfolio item 5-->
                         <div class="portfolio-item">
                             <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal5">
                                 <div class="portfolio-hover">
@@ -227,14 +390,12 @@
                                 <img class="img-fluid" src="assets/img/portfolio/5.jpg" alt="..." />
                             </a>
                             <div class="portfolio-caption">
-                                <div class="portfolio-caption-heading">Mini BU Job Fair 2024 (Technology Industry)</div>
+                                <div class="portfolio-caption-heading">Mini BU Job Fair 2024 (Technology)</div>
                                 <div class="portfolio-caption-subheading text-muted">15 May 2024</div>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6">
-
-                        <!-- Portfolio item 6-->
                         <div class="portfolio-item">
                             <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal6">
                                 <div class="portfolio-hover">
@@ -249,8 +410,6 @@
                         </div>
                     </div>                    
                     <div class="col-lg-4 col-sm-6">
-
-                        <!-- Portfolio item 7-->
                         <div class="portfolio-item">
                             <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal7">
                                 <div class="portfolio-hover">
@@ -265,8 +424,6 @@
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6">
-
-                        <!-- Portfolio item 8-->
                         <div class="portfolio-item">
                             <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal8">
                                 <div class="portfolio-hover">
@@ -281,8 +438,6 @@
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6">
-
-                        <!-- Portfolio item 9-->
                         <div class="portfolio-item">
                             <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal9">
                                 <div class="portfolio-hover">
@@ -299,8 +454,70 @@
             </div>
         </section>
 
-        <!-- Certificates -->
-        <section class="page-section bg-light" id="certificate">
+<section class="page-section" id="project">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="section-heading text-uppercase">Projects</h2>
+                    <h3 class="section-subheading text-muted">A showcase of my coding projects.</h3>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4 col-sm-6 mb-4">
+                        <div class="project-card-flip-container">
+                            <div class="project-card-flipper">
+                                <div class="project-card-front">
+                                    <img src="assets/img/projects/1.jpg" alt="Project Image" />
+                                </div>
+                                <div class="project-card-back">
+                                    <h4 class="text-uppercase">Lazy Healthy</h4>
+                                    <p class="text-white-50">Developed a health-related application using Python for the interface and SQL for database management.</p>
+                                    <div class="project-tech-icons my-2">
+                                        <i class="fab fa-python" title="Python"></i>
+                                        <i class="fas fa-database" title="SQL"></i>
+                                    </div>
+                                    <a class="btn btn-primary btn-sm" href="https://youtu.be/yUII42CNiTM?si=VqiqryS_MkAkbMX3" target="_blank" rel="noopener">View Project</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-6 mb-4">
+                        <div class="project-card-flip-container">
+                            <div class="project-card-flipper">
+                                <div class="project-card-front">
+                                    <img src="assets/img/projects/2.jpg" alt="Project Image" />
+                                </div>
+                                <div class="project-card-back">
+                                    <h4 class="text-uppercase">DeFake Project</h4>
+                                    <p class="text-white-50">Developed an AI model using Python to detect and classify fake news vs. real news, achieving reliable classification performance</p>
+                                    <div class="project-tech-icons my-2">
+                                        <i class="fab fa-python" title="Python"></i>
+                                        <i class="fas fa-robot" title="Machine Learning"></i>
+                                    </div>
+                                    <a class="btn btn-primary btn-sm" href="https://www.canva.com/design/DAGnZTS-u1U/S6AiMtby_CkV3JGdTPsrRA/view?utm_content=DAGnZTS-u1U&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hd0f4b2e7eb" target="_blank" rel="noopener">View Project</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-6 mb-4">
+                        <div class="project-card-flip-container">
+                            <div class="project-card-flipper">
+                                <div class="project-card-front">
+                                    <img src="assets/img/projects/3.jpg" alt="Project Image" />
+                                </div>
+                                <div class="project-card-back">
+                                    <h4 class="text-uppercase">OSI Model: Summary Guide</h4>
+                                    <p class="text-white-50">Created educational content on the OSI Model for learners, featuring clear and easy-to-understand explanations supported by engaging animations.</p>
+                                    <div class="project-tech-icons my-2">
+                                    </div>
+                                    <a class="btn btn-primary btn-sm" href="https://youtu.be/jFpxdOOafTs?si=z_fmSMtY-LT9UmYB" target="_blank" rel="noopener">View Project</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="page-section" id="certificate">
             <div class="container">
             <div class="text-center mb-5">
                 <h2 class="section-heading text-uppercase">Certificates</h2>
@@ -354,35 +571,45 @@
             </div>
             </div>
         </section>
-        <style>
-        .certificate-card {
-            transition: transform 0.2s, box-shadow 0.2s;
-            background: linear-gradient(135deg, #f8fafc 60%, #e3e6f3 100%);
-            height: 100%;
-            display: flex;
-            align-items: stretch;
-        }
-        .certificate-card:hover {
-            transform: scale(1.05) rotate(-2deg);
-            box-shadow: 0 8px 32px rgba(0,0,0,0.15);
-            z-index: 2;
-        }
-        .certificate-card img {
-            object-fit: cover;
-            height: 100%;
-            width: 100%;
-            border-radius: 1rem;
-            box-shadow: 0 2px 16px rgba(0,0,0,0.08);
-            display: block;
-        }
-        @media (max-width: 768px) {
-            .certificate-card img {
-            height: 200px;
-            }
-        }
-        </style>
 
-        <!-- Footer-->
+<!-- CONTACT -->
+<section class="page-section" id="contact">
+  <div class="container">
+    <div class="text-center">
+      <h2 class="section-heading text-uppercase">Contact</h2>
+      <h3 class="section-subheading text-muted">Get in touch with me</h3>
+    </div>
+    <div class="row text-center">
+      <!-- Email -->
+      <div class="col-md-4">
+        <span class="fa-stack fa-2x">
+          <i class="fas fa-circle fa-stack-2x text-primary"></i>
+          <i class="fas fa-envelope fa-stack-1x fa-inverse"></i>
+        </span>
+        <p><a href="mailto:ingnop.k@outlook.com">ingnop.k@outlook.com</a></p>
+      </div>
+      <!-- Line -->
+      <div class="col-md-4">
+        <span class="fa-stack fa-2x">
+          <i class="fas fa-circle fa-stack-2x text-success"></i>
+          <i class="fab fa-line fa-stack-1x fa-inverse"></i>
+        </span>
+        <p><a href="https://line.me/ti/p/~yourlineid" target="_blank">ingnop23578</a></p>
+      </div>
+      <!-- GitHub -->
+      <div class="col-md-4">
+        <span class="fa-stack fa-2x">
+          <i class="fas fa-circle fa-stack-2x text-dark"></i>
+          <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+        </span>
+        <p><a href="https://github.com/ingnop" target="_blank">github.com/ingnop</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+ 
+        
         <footer class="footer py-3">
             <div class="container">
             <div class="row justify-content-center align-items-center">
@@ -393,8 +620,6 @@
             </div>
             </div>
         </footer>
-        <!-- Portfolio Modals-->
-        <!-- Portfolio item 1 modal popup-->
         <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -403,18 +628,21 @@
                         <div class="row justify-content-center">
                             <div class="col-lg-8">
                                 <div class="modal-body">
-                                    <!-- Project details-->
                                     <h2 class="text-uppercase">Sawat D Craft</h2>
-                                    <p class="item-intro text-muted">1- 4 July 2025</p>
-                                    <img class="img-fluid d-block mx-auto" src="assets/img/portfolio/1.jpg" alt="..." />
-                                    <p>This activity centered on creativity and hands-on experience through four mini Art & Craft workshops, designed to encourage self-expression, collaboration, and skill development. </p>
-                                    <ul class="list-inline">
-                                        <li>
-                                            <strong>Position:</strong>
-                                            Staff                                            
-                                        </li>
-                                    </ul>
-                                    <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
+                                    <p class="item-intro text-muted">1 - 4 July 2024</p>
+                                    <img class="img-fluid d-block mx-auto mb-4" src="assets/img/portfolio/1.jpg" alt="..." />
+                                    <p>This activity centered on creativity and hands-on experience through four mini Art & Craft workshops, designed to encourage self-expression, collaboration, and skill development.</p>
+                                    <div class="text-start w-75 mx-auto">
+                                        <h5 class="text-uppercase">My Role & Responsibilities:</h5>
+                                        <ul class="list-unstyled">
+                                            <li><i class="fas fa-angle-right text-primary me-2"></i>Managed workshop materials and inventory.</li>
+                                            <li><i class="fas fa-angle-right text-primary me-2"></i>Assisted participants during the workshops.</li>
+                                            <li><i class="fas fa-angle-right text-primary me-2"></i>Ensured the event ran smoothly.</li>
+                                        </ul>
+                                        <h5 class="text-uppercase mt-3">Skills Applied:</h5>
+                                        <p>Organization, Communication, Problem-solving</p>
+                                    </div>
+                                    <button class="btn btn-primary btn-xl text-uppercase mt-4" data-bs-dismiss="modal" type="button">
                                         <i class="fas fa-xmark me-1"></i>
                                         Close
                                     </button>
@@ -425,7 +653,6 @@
                 </div>
             </div>
         </div>
-        <!-- Portfolio item 2 modal popup-->
         <div class="portfolio-modal modal fade" id="portfolioModal2" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -434,18 +661,21 @@
                         <div class="row justify-content-center">
                             <div class="col-lg-8">
                                 <div class="modal-body">
-                                    <!-- Project details-->
                                     <h2 class="text-uppercase">Abilify : Au & All</h2>
-                                    <p class="item-intro text-muted">20 May - 20 June 2025</p>
-                                    <img class="img-fluid d-block mx-auto" src="assets/img/portfolio/2.png" alt="..." />
+                                    <p class="item-intro text-muted">20 May - 20 June 2024</p>
+                                    <img class="img-fluid d-block mx-auto mb-4" src="assets/img/portfolio/2.png" alt="..." />
                                     <p>This is a project conducted in collaboration with school children and children with autism, aiming to enhance general students' knowledge and understanding of autism, while also developing social participation skills for children with autism.</p>
-                                    <ul class="list-inline">
-                                        <li>
-                                            <strong>Position:</strong>
-                                            Stock Coordinator & Technical Support
-                                        </li>
-                                    </ul>
-                                    <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
+                                    <div class="text-start w-75 mx-auto">
+                                        <h5 class="text-uppercase">My Role & Responsibilities:</h5>
+                                        <ul class="list-unstyled">
+                                            <li><i class="fas fa-angle-right text-primary me-2"></i>Coordinated stock and materials for project activities.</li>
+                                            <li><i class="fas fa-angle-right text-primary me-2"></i>Provided technical support for presentations and equipment.</li>
+                                            <li><i class="fas fa-angle-right text-primary me-2"></i>Assisted in setting up the event space.</li>
+                                        </ul>
+                                        <h5 class="text-uppercase mt-3">Skills Applied:</h5>
+                                        <p>Inventory Management, Technical Support, Adaptability</p>
+                                    </div>
+                                    <button class="btn btn-primary btn-xl text-uppercase mt-4" data-bs-dismiss="modal" type="button">
                                         <i class="fas fa-xmark me-1"></i>
                                         Close
                                     </button>
@@ -456,7 +686,6 @@
                 </div>
             </div>
         </div>
-        <!-- Portfolio item 3 modal popup-->
         <div class="portfolio-modal modal fade" id="portfolioModal3" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -465,18 +694,21 @@
                         <div class="row justify-content-center">
                             <div class="col-lg-8">
                                 <div class="modal-body">
-                                    <!-- Project details-->
                                     <h2 class="text-uppercase">Abilify : BU x Abilify Trainee</h2>
-                                    <p class="item-intro text-muted">14 March - 4 April 2025</p>
-                                    <img class="img-fluid d-block mx-auto" src="assets/img/portfolio/3.png" alt="..." />
-                                    <p>This is a project carried out in collaboration with university students, with the aim of fostering awareness, understanding, and readiness to support individuals with autism. </p>
-                                    <ul class="list-inline">
-                                        <li>
-                                            <strong>Position:</strong>
-                                            Facilitator & Technical Support
-                                        </li>
-                                    </ul>
-                                    <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
+                                    <p class="item-intro text-muted">14 March - 4 April 2024</p>
+                                    <img class="img-fluid d-block mx-auto mb-4" src="assets/img/portfolio/3.png" alt="..." />
+                                    <p>This is a project carried out in collaboration with university students, with the aim of fostering awareness, understanding, and readiness to support individuals with autism.</p>
+                                    <div class="text-start w-75 mx-auto">
+                                        <h5 class="text-uppercase">My Role & Responsibilities:</h5>
+                                        <ul class="list-unstyled">
+                                            <li><i class="fas fa-angle-right text-primary me-2"></i>Acted as a facilitator to guide discussions and activities.</li>
+                                            <li><i class="fas fa-angle-right text-primary me-2"></i>Handled technical setup for virtual and in-person sessions.</li>
+                                            <li><i class="fas fa-angle-right text-primary me-2"></i>Engaged with participants to ensure a positive learning environment.</li>
+                                        </ul>
+                                        <h5 class="text-uppercase mt-3">Skills Applied:</h5>
+                                        <p>Facilitation, Public Speaking, Empathy, Technical Support</p>
+                                    </div>
+                                    <button class="btn btn-primary btn-xl text-uppercase mt-4" data-bs-dismiss="modal" type="button">
                                         <i class="fas fa-xmark me-1"></i>
                                         Close
                                     </button>
@@ -487,7 +719,6 @@
                 </div>
             </div>
         </div>
-        <!-- Portfolio item 4 modal popup-->
         <div class="portfolio-modal modal fade" id="portfolioModal4" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -496,72 +727,9 @@
                         <div class="row justify-content-center">
                             <div class="col-lg-8">
                                 <div class="modal-body">
-                                    <!-- Project details-->
                                     <h2 class="text-uppercase">BU Game On! Job Fair 2024</h2>
                                     <p class="item-intro text-muted">2 December 2024</p>
                                     <img class="img-fluid d-block mx-auto" src="assets/img/portfolio/4.jpg" alt="..." />
-                                    <p>BU Game On! Job Fair 2024 was an event that showcased student-created games through a competitive exhibition, providing a platform for young developers to present their work. The event also featured a job fair segment, connecting participants with companies in the gaming industry and technology-related fields. </p>
-                                    <ul class="list-inline">
-                                        <li>
-                                            <strong>Position:</strong>
-                                            Staff
-                                        </li>
-                                    </ul>
-                                    <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
-                                        <i class="fas fa-xmark me-1"></i>
-                                        Close
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Portfolio item 5 modal popup-->
-        <div class="portfolio-modal modal fade" id="portfolioModal5" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="close-modal" data-bs-dismiss="modal"><img src="assets/img/close-icon.svg" alt="Close modal" /></div>
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-8">
-                                <div class="modal-body">
-                                    <!-- Project details-->
-                                    <h2 class="text-uppercase">Mini BU Job Fair 2024 (Technology Industry)</h2>
-                                    <p class="item-intro text-muted">15 May 2024</p>
-                                    <img class="img-fluid d-block mx-auto" src="assets/img/portfolio/5.jpg" alt="..." />
-                                    <p>A Mini BU Job Fair featuring companies from various industries and the tech sector, offering internship and employment opportunities for university students. </p>
-                                    <ul class="list-inline">
-                                        <li>
-                                            <strong>Position:</strong>
-                                            Staff
-                                        </li>
-                                    </ul>
-                                    <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
-                                        <i class="fas fa-xmark me-1"></i>
-                                        Close
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Portfolio item 6 modal popup-->
-        <div class="portfolio-modal modal fade" id="portfolioModal6" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="close-modal" data-bs-dismiss="modal"><img src="assets/img/close-icon.svg" alt="Close modal" /></div>
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-8">
-                                <div class="modal-body">
-                                    <!-- Project details-->
-                                    <h2 class="text-uppercase">Mini BU Job Fair 2024 (Taiwan)</h2>
-                                    <p class="item-intro text-muted">12 March 2024</p>
-                                    <img class="img-fluid d-block mx-auto" src="assets/img/portfolio/6.jpg" alt="..." />
                                     <p>BU Game On! Job Fair 2024 was an event that showcased student-created games through a competitive exhibition, providing a platform for young developers to present their work. The event also featured a job fair segment, connecting participants with companies in the gaming industry and technology-related fields.</p>
                                     <ul class="list-inline">
                                         <li>
@@ -580,8 +748,7 @@
                 </div>
             </div>
         </div>
-                <!-- Portfolio item 7 modal popup-->
-        <div class="portfolio-modal modal fade" id="portfolioModal7" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="portfolio-modal modal fade" id="portfolioModal5" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="close-modal" data-bs-dismiss="modal"><img src="assets/img/close-icon.svg" alt="Close modal" /></div>
@@ -589,11 +756,10 @@
                         <div class="row justify-content-center">
                             <div class="col-lg-8">
                                 <div class="modal-body">
-                                    <!-- Project details-->
-                                    <h2 class="text-uppercase">BU Job Fair 2023</h2>
-                                    <p class="item-intro text-muted">17 - 19 October 2023</p>
-                                    <img class="img-fluid d-block mx-auto" src="assets/img/portfolio/7.jpg" alt="..." />
-                                    <p>BU Job Fair 2023 was an annual event that gathered leading companies across various industries, offering students opportunities to explore career paths, apply for internships or full-time positions, and connect with potential employers. </p>
+                                    <h2 class="text-uppercase">Mini BU Job Fair 2024 (Technology Industry)</h2>
+                                    <p class="item-intro text-muted">15 May 2024</p>
+                                    <img class="img-fluid d-block mx-auto" src="assets/img/portfolio/5.jpg" alt="..." />
+                                    <p>A Mini BU Job Fair featuring companies from various industries and the tech sector, offering internship and employment opportunities for university students.</p>
                                     <ul class="list-inline">
                                         <li>
                                             <strong>Position:</strong>
@@ -611,7 +777,64 @@
                 </div>
             </div>
         </div>
-                <!-- Portfolio item 8 modal popup-->
+        <div class="portfolio-modal modal fade" id="portfolioModal6" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="close-modal" data-bs-dismiss="modal"><img src="assets/img/close-icon.svg" alt="Close modal" /></div>
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-8">
+                                <div class="modal-body">
+                                    <h2 class="text-uppercase">Mini BU Job Fair 2024 (Taiwan)</h2>
+                                    <p class="item-intro text-muted">12 March 2024</p>
+                                    <img class="img-fluid d-block mx-auto" src="assets/img/portfolio/6.jpg" alt="..." />
+                                    <p>This event connected students with companies from Taiwan, offering unique internship and job opportunities abroad.</p>
+                                    <ul class="list-inline">
+                                        <li>
+                                            <strong>Position:</strong>
+                                            Staff
+                                        </li>
+                                    </ul>
+                                    <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
+                                        <i class="fas fa-xmark me-1"></i>
+                                        Close
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="portfolio-modal modal fade" id="portfolioModal7" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="close-modal" data-bs-dismiss="modal"><img src="assets/img/close-icon.svg" alt="Close modal" /></div>
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-8">
+                                <div class="modal-body">
+                                    <h2 class="text-uppercase">BU Job Fair 2023</h2>
+                                    <p class="item-intro text-muted">17 - 19 October 2023</p>
+                                    <img class="img-fluid d-block mx-auto" src="assets/img/portfolio/7.jpg" alt="..." />
+                                    <p>BU Job Fair 2023 was an annual event that gathered leading companies across various industries, offering students opportunities to explore career paths, apply for internships or full-time positions, and connect with potential employers.</p>
+                                    <ul class="list-inline">
+                                        <li>
+                                            <strong>Position:</strong>
+                                            Staff
+                                        </li>
+                                    </ul>
+                                    <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
+                                        <i class="fas fa-xmark me-1"></i>
+                                        Close
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="portfolio-modal modal fade" id="portfolioModal8" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -620,7 +843,6 @@
                         <div class="row justify-content-center">
                             <div class="col-lg-8">
                                 <div class="modal-body">
-                                    <!-- Project details-->
                                     <h2 class="text-uppercase">Break the Binary Vol.2 : NEW REALM</h2>
                                     <p class="item-intro text-muted">28- 30 June 2023</p>
                                     <img class="img-fluid d-block mx-auto" src="assets/img/portfolio/8.jpg" alt="..." />
@@ -642,7 +864,6 @@
                 </div>
             </div>
         </div>
-                <!-- Portfolio item 9 modal popup-->
         <div class="portfolio-modal modal fade" id="portfolioModal9" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -651,11 +872,10 @@
                         <div class="row justify-content-center">
                             <div class="col-lg-8">
                                 <div class="modal-body">
-                                    <!-- Project details-->
                                     <h2 class="text-uppercase">BU Job Fair 2022</h2>
                                     <p class="item-intro text-muted">20 October 2022</p>
                                     <img class="img-fluid d-block mx-auto" src="assets/img/portfolio/9.jpg" alt="..." />
-                                    <p> BU Job Fair 2022 was an annual event that gathered leading companies across various industries, offering students opportunities to explore career paths, apply for internships or full-time positions, and connect with potential employers.</p>
+                                    <p>BU Job Fair 2022 was an annual event that gathered leading companies across various industries, offering students opportunities to explore career paths, apply for internships or full-time positions, and connect with potential employers.</p>
                                     <ul class="list-inline">
                                         <li>
                                             <strong>Position:</strong>
@@ -673,14 +893,170 @@
                 </div>
             </div>
         </div>
-        <!-- Bootstrap core JS-->
+
+<div class="portfolio-modal modal fade" id="projectModal1" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="close-modal" data-bs-dismiss="modal"><img src="assets/img/close-icon.svg" alt="Close modal" /></div>
+                    <div class="ratio ratio-16x9 mb-4">
+                        <iframe src="https://youtu.be/yUII42CNiTM?si=TbgKivaxuWnfkmh7" title="YouTube video" allowfullscreen></iframe>
+                    </div>
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-8">
+                                <div class="modal-body">
+                                    <h2 class="text-uppercase">Sales Data Analysis</h2>
+                                    <p class="item-intro text-muted">Exploring trends in retail sales data.</p>
+                                    <img class="img-fluid d-block mx-auto mb-4" src="assets/img/projects/1.jpg" alt="..." />
+                                    <div class="text-start w-75 mx-auto">
+                                        <p>This project involved cleaning, processing, and analyzing a large dataset of sales transactions. The goal was to uncover patterns in sales, identify best-selling products, and visualize customer demographics to provide actionable insights for the marketing team.</p>
+                                        <h5 class="text-uppercase mt-4">Key Features:</h5>
+                                        <ul class="list-unstyled">
+                                            <li><i class="fas fa-check text-primary me-2"></i>Data cleaning and preprocessing using Pandas.</li>
+                                            <li><i class="fas fa-check text-primary me-2"></i>Trend analysis and time-series visualization with Matplotlib.</li>
+                                            <li><i class="fas fa-check text-primary me-2"></i>Interactive dashboard created with Seaborn.</li>
+                                        </ul>
+                                        <h5 class="text-uppercase mt-3">Technologies Used:</h5>
+                                        <p>Python, Pandas, NumPy, Matplotlib, Seaborn, SQL</p>
+                                    </div>
+                                    <a href="#!" class="btn btn-dark mt-4" target="_blank"><i class="fab fa-github me-2"></i>View on GitHub</a>
+                                    <button class="btn btn-primary btn-xl text-uppercase mt-4" data-bs-dismiss="modal" type="button">
+                                        <i class="fas fa-xmark me-1"></i>
+                                        Close
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="portfolio-modal modal fade" id="projectModal2" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="close-modal" data-bs-dismiss="modal"><img src="assets/img/close-icon.svg" alt="Close modal" /></div>
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-8">
+                                <div class="modal-body">
+                                    <h2 class="text-uppercase">Customer Segmentation</h2>
+                                    <p class="item-intro text-muted">A machine learning approach to group customers.</p>
+                                    <img class="img-fluid d-block mx-auto mb-4" src="assets/img/portfolio/8.jpg" alt="..." />
+                                    <div class="text-start w-75 mx-auto">
+                                        <p>Utilized unsupervised machine learning to segment customers into distinct groups based on their purchasing behavior. This model helps in creating targeted marketing campaigns for different customer personas, improving engagement and conversion rates.</p>
+                                        <h5 class="text-uppercase mt-4">Key Features:</h5>
+                                        <ul class="list-unstyled">
+                                            <li><i class="fas fa-check text-primary me-2"></i>Feature engineering from transactional data.</li>
+                                            <li><i class="fas fa-check text-primary me-2"></i>Implementation of K-Means clustering algorithm.</li>
+                                            <li><i class="fas fa-check text-primary me-2"></i>Evaluation of clusters using silhouette scores.</li>
+                                        </ul>
+                                        <h5 class="text-uppercase mt-3">Technologies Used:</h5>
+                                        <p>Python, Scikit-learn, Pandas, Matplotlib</p>
+                                    </div>
+                                    <a href="#!" class="btn btn-dark mt-4" target="_blank"><i class="fab fa-github me-2"></i>View on GitHub</a>
+                                    <button class="btn btn-primary btn-xl text-uppercase mt-4" data-bs-dismiss="modal" type="button">
+                                        <i class="fas fa-xmark me-1"></i>
+                                        Close
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="portfolio-modal modal fade" id="projectModal3" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="close-modal" data-bs-dismiss="modal"><img src="assets/img/close-icon.svg" alt="Close modal" /></div>
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-8">
+                                <div class="modal-body">
+                                    <h2 class="text-uppercase">Web Scraper Bot</h2>
+                                    <p class="item-intro text-muted">Automated data collection from the web.</p>
+                                    <img class="img-fluid d-block mx-auto mb-4" src="assets/img/portfolio/9.jpg" alt="..." />
+                                    <div class="text-start w-75 mx-auto">
+                                       <p>This project features a custom-built web scraping bot designed to extract product information, pricing, and customer reviews from several e-commerce sites. The collected data is then structured and stored in a CSV file for further analysis.</p>
+                                        <h5 class="text-uppercase mt-4">Key Features:</h5>
+                                        <ul class="list-unstyled">
+                                            <li><i class="fas fa-check text-primary me-2"></i>Dynamic data extraction from HTML structures.</li>
+                                            <li><i class="fas fa-check text-primary me-2"></i>Handles pagination and navigates through multiple pages.</li>
+                                            <li><i class="fas fa-check text-primary me-2"></i>Saves data into a clean, well-formatted CSV file.</li>
+                                        </ul>
+                                        <h5 class="text-uppercase mt-3">Technologies Used:</h5>
+                                        <p>Python, BeautifulSoup, Requests, Pandas</p>
+                                    </div>
+                                    <a href="#!" class="btn btn-dark mt-4" target="_blank"><i class="fab fa-github me-2"></i>View on GitHub</a>
+                                    <button class="btn btn-primary btn-xl text-uppercase mt-4" data-bs-dismiss="modal" type="button">
+                                        <i class="fas fa-xmark me-1"></i>
+                                        Close
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
-        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-        <!-- * *                               SB Forms JS                               * *-->
-        <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
-        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                // --- Filter Logic ---
+                const filterContainer = document.querySelector("#experience-filters");
+                const experienceItems = document.querySelectorAll("#experience-grid .experience-item-wrapper");
+
+                if (filterContainer) {
+                    filterContainer.addEventListener("click", (event) => {
+                        if (event.target.tagName === "LI") {
+                            // Update active button
+                            filterContainer.querySelector(".active").classList.remove("active");
+                            event.target.classList.add("active");
+
+                            const filterValue = event.target.getAttribute("data-filter");
+
+                            experienceItems.forEach(item => {
+                                item.classList.add('hide'); // Start hiding animation
+                                setTimeout(() => { // Wait for animation before changing display
+                                    if (item.getAttribute('data-category') === filterValue || filterValue === "all") {
+                                        item.style.display = 'block';
+                                        setTimeout(() => item.classList.remove('hide'), 10);
+                                    } else {
+                                        item.style.display = 'none';
+                                    }
+                                }, 400);
+                            });
+                        }
+                    });
+                }
+
+                // --- On-Scroll Fade-In Logic ---
+                const fadeInElements = document.querySelectorAll('.fade-in-element');
+                
+                const observerOptions = {
+                    root: null,
+                    rootMargin: '0px',
+                    threshold: 0.1
+                };
+
+                const observer = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('is-visible');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, observerOptions);
+
+                fadeInElements.forEach(el => {
+                    observer.observe(el);
+                });
+            });
+        </script>
+
     </body>
 </html>
